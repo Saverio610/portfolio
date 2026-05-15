@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Saverio Riccardi — Ingegnere Meccanico</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --fg: #1a1a18;
+      --fg2: #555550;
+      --fg3: #999990;
+      --bg: #faf9f6;
+      --bg2: #f2f1ed;
+      --border: rgba(26,26,24,0.12);
+      --border2: rgba(26,26,24,0.22);
+      --accent: #2a3d5c;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--fg);
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,249,246,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 0.5px solid var(--border);
+      padding: 0 2rem;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 19px;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      color: var(--fg);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--fg2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--fg); }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    section { padding: 5rem 0; }
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-tag::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--border);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding: 7rem 0 5rem;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 1.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.1s forwards;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(48px, 7vw, 76px);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.6rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+    .hero-name em { font-style: italic; }
+    .hero-bio {
+      font-size: 15px;
+      color: var(--fg2);
+      max-width: 460px;
+      line-height: 1.85;
+      margin-bottom: 2.2rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s forwards;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.4s forwards;
+    }
+    .tag {
+      font-size: 11px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 5px 13px;
+      border: 0.5px solid var(--border2);
+      border-radius: 20px;
+      color: var(--fg2);
+      background: transparent;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 10px;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+    .btn {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 11px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .btn-dark {
+      background: var(--fg);
+      color: var(--bg);
+      border: none;
+    }
+    .btn-dark:hover { background: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      color: var(--fg);
+      border: 0.5px solid var(--border2);
+    }
+    .btn-outline:hover { background: var(--bg2); }
+
+    /* Avatar / foto */
+    .hero-avatar {
+      width: 200px;
+      height: 240px;
+      border-radius: 3px;
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      flex-shrink: 0;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.3s forwards;
+      overflow: hidden;
+    }
+    .avatar-initials {
+      font-family: var(--serif);
+      font-size: 42px;
+      font-weight: 300;
+      color: var(--fg3);
+      line-height: 1;
+    }
+    .avatar-hint {
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      text-align: center;
+      padding: 0 1rem;
+      line-height: 1.5;
+    }
+    /* Se si vuole inserire una foto reale, sostituire .hero-avatar con:
+       <img src="foto.jpg" alt="Saverio Riccardi" class="hero-photo"> */
+    .hero-photo {
+      width: 200px;
+      height: 240px;
+      border-radius: 3px;
+      object-fit: cover;
+      border: 0.5px solid var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about { border-top: 0.5px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .about-text h2 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.4rem;
+      letter-spacing: -0.01em;
+    }
+    .about-text h2 em { font-style: italic; }
+    .about-text p {
+      font-size: 14px;
+      color: var(--fg2);
+      line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .stat {
+      padding: 1.3rem 1.4rem;
+      background: var(--bg2);
+      border-radius: 4px;
+      border: 0.5px solid var(--border);
+    }
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      color: var(--fg);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--fg3);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── SKILLS ── */
+    #skills { border-top: 0.5px solid var(--border); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      border: 0.5px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .skill-block {
+      padding: 1.8rem 2rem;
+      background: var(--bg);
+      border-right: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .skill-block:nth-child(2n) { border-right: none; }
+    .skill-block:nth-last-child(-n+2) { border-bottom: none; }
+    .skill-block-title {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 1rem;
+    }
+    .skill-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .skill-pill {
+      font-size: 13px;
+      padding: 4px 12px;
+      background: var(--bg2);
+      border-radius: 20px;
+      color: var(--fg);
+      border: 0.5px solid var(--border);
+    }
+    .skill-pill.primary {
+      background: var(--fg);
+      color: var(--bg);
+      border-color: var(--fg);
+    }
+
+    /* ── ESPERIENZA ── */
+    #experience { border-top: 0.5px solid var(--border); }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 0.5px solid var(--border);
+    }
+    .exp-item:first-of-type { padding-top: 0; }
+    .exp-item:last-of-type { border-bottom: none; }
+    .exp-date {
+      font-size: 12px;
+      color: var(--fg3);
+      letter-spacing: 0.04em;
+      padding-top: 3px;
+    }
+    .exp-role {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .exp-company {
+      font-size: 13px;
+      color: var(--fg3);
+      margin-bottom: 1rem;
+      letter-spacing: 0.02em;
+    }
+    .exp-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .exp-list li {
+      font-size: 13px;
+      color: var(--fg2);
+      line-height: 1.6;
+      padding-left: 1rem;
+      position: relative;
+    }
+    .exp-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--fg3);
+      font-size: 11px;
+      top: 2px;
+    }
+
+    /* ── PROGETTI ── */
+    #projects { border-top: 0.5px solid var(--border); }
+    .projects-list { display: flex; flex-direction: column; }
+    .project-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      padding: 2rem 0;
+      border-bottom: 0.5px solid var(--border);
+      transition: background 0.15s;
+    }
+    .project-row:last-child { border-bottom: none; }
+    .project-category {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--fg3);
+      margin-bottom: 5px;
+    }
+    .project-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+    .project-desc {
+      font-size: 13px;
+      color: var(--fg2);
+      line-height: 1.7;
+      max-width: 520px;
+    }
+    .project-badge {
+      font-size: 11px;
+      padding: 4px 10px;
+      border: 0.5px solid var(--border2);
+      border-radius: 20px;
+      color: var(--fg3);
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+
+    /* ── FORMAZIONE ── */
+    #education { border-top: 0.5px solid var(--border); }
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .edu-card {
+      padding: 1.8rem 2rem;
+      background: var(--bg2);
+      border-radius: 4px;
+      border: 0.5px solid var(--border);
+    }
+    .edu-degree {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+    .edu-uni { font-size: 13px; color: var(--fg3); margin-bottom: 4px; }
+    .edu-years { font-size: 12px; color: var(--fg3); letter-spacing: 0.04em; }
+    .edu-vote {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(42,61,92,0.08);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── CONTATTI ── */
+    #contact { border-top: 0.5px solid var(--border); }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .contact-heading em { font-style: italic; }
+    .contact-sub { font-size: 14px; color: var(--fg2); line-height: 1.7; }
+    .contact-list { display: flex; flex-direction: column; gap: 1px; }
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 1.1rem 1.3rem;
+      background: var(--bg2);
+      border: 0.5px solid var(--border);
+      text-decoration: none;
+      color: var(--fg);
+      transition: background 0.15s;
+    }
+    .contact-row:first-child { border-radius: 4px 4px 0 0; }
+    .contact-row:last-child { border-radius: 0 0 4px 4px; }
+    .contact-row:hover { background: var(--bg); }
+    .contact-icon { font-size: 16px; color: var(--fg3); flex-shrink: 0; }
+    .contact-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--fg3); }
+    .contact-val { font-size: 14px; font-weight: 400; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 0.5px solid var(--border);
+      padding: 2rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer span { font-size: 12px; color: var(--fg3); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-avatar { display: none; }
+      .about-grid, .edu-grid, .contact-layout { grid-template-columns: 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      nav { padding: 0 1rem; }
+      .container { padding: 0 1.2rem; }
+      section { padding: 3rem 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">Saverio Riccardi</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Esperienza</a></li>
+      <li><a href="#projects">Progetti</a></li>
+      <li><a href="#contact">Contatti</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div>
+          <p class="hero-eyebrow">Ingegnere Meccanico · Industria 4.0</p>
+          <h1 class="hero-name">Saverio<br><em>Riccardi</em></h1>
+          <p class="hero-bio">
+            Laureato Magistrale in Ingegneria Meccanica al Politecnico di Bari,
+            specializzato in progettazione CAD, analisi FEM e tecnologie abilitanti.
+            Attualmente Ricercatore R&D presso Dyrecta Lab.
+          </p>
+          <div class="hero-tags">
+            <span class="tag">CAD</span>
+            <span class="tag">FEM</span>
+            <span class="tag">Industria 4.0</span>
+            <span class="tag">Additive Manufacturing</span>
+            <span class="tag">R&D</span>
+            <span class="tag">Project Management</span>
+          </div>
+          <div class="hero-cta">
+            <a href="#contact" class="btn btn-dark">Contattami</a>
+            <a href="#projects" class="btn btn-outline">Vedi Progetti</a>
+          </div>
+        </div>
+
+        <!-- Placeholder foto — sostituisci con <img src="foto.jpg" class="hero-photo" alt="Saverio Riccardi"> -->
+        <div class="hero-avatar">
+          <span class="avatar-initials">SR</span>
+          <span class="avatar-hint">Aggiungi<br>la tua foto</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-tag">Chi sono</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <h2>Progettare il<br><em>futuro industriale</em></h2>
+          <p>
+            Sono Saverio Riccardi, ingegnere meccanico con una forte passione per la progettazione
+            avanzata e le tecnologie dell'Industria 4.0. Ho conseguito la Laurea Magistrale presso
+            il Politecnico di Bari con votazione 106/110, sviluppando competenze solide in
+            modellazione CAD, analisi strutturale FEM e Additive Manufacturing.
+          </p>
+          <p>
+            Attualmente lavoro come Ricercatore Ingegnere Meccanico R&D presso Dyrecta Lab,
+            dove mi occupo di progettazioni meccaniche ad alto livello, project management e
+            partenariati con aziende per ricerca e sviluppo industriale. Il mio approccio unisce
+            rigore tecnico e creatività, con un costante orientamento all'innovazione.
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">106<span style="font-size:20px">/110</span></div>
+            <div class="stat-label">Voto di Laurea Magistrale</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Software CAD padroneggiati</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">8+</div>
+            <div class="stat-label">Progetti accademici e di ricerca</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-tag">Competenze tecniche</p>
+      <div class="skills-grid">
+        <div class="skill-block">
+          <p class="skill-block-title">Modellazione CAD</p>
+          <div class="skill-items">
+            <span class="skill-pill primary">Inventor</span>
+            <span class="skill-pill primary">Fusion 360</span>
+            <span class="skill-pill">SolidWorks</span>
+            <span class="skill-pill">Creo</span>
+            <span class="skill-pill">OnShape</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <p class="skill-block-title">Analisi FEM</p>
+          <div class="skill-items">
+            <span class="skill-pill primary">ANSYS</span>
+            <span class="skill-pill">Inventor Simulation</span>
+            <span class="skill-pill">SolidWorks Sim.</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <p class="skill-block-title">Programmazione & Office</p>
+          <div class="skill-items">
+            <span class="skill-pill">MATLAB</span>
+            <span class="skill-pill">Word</span>
+            <span class="skill-pill">Excel</span>
+            <span class="skill-pill">PowerPoint</span>
+          </div>
+        </div>
+        <div class="skill-block">
+          <p class="skill-block-title">Norme & Soft Skills</p>
+          <div class="skill-items">
+            <span class="skill-pill">ISO</span>
+            <span class="skill-pill">UNI</span>
+            <span class="skill-pill">Project Management</span>
+            <span class="skill-pill">Team Leadership</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPERIENZA -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-tag">Esperienza professionale</p>
+      <div class="exp-item">
+        <div class="exp-date">Ott 2024 — Oggi</div>
+        <div>
+          <p class="exp-role">Ricercatore Ingegnere Meccanico R&D</p>
+          <p class="exp-company">Dyrecta Lab — Istituto di Ricerca</p>
+          <ul class="exp-list">
+            <li>Stesura di documenti tecnici e relazioni di ricerca</li>
+            <li>Progettazioni meccaniche ad alto livello, modelli CAD e analisi normativa</li>
+            <li>Project Manager su progetti di ricerca industriale</li>
+            <li>Lavoro in team interdisciplinari per l'adozione di tecnologie abilitanti</li>
+            <li>Partenariati con aziende per ricerca e sviluppo in ambito industriale</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGETTI -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-tag">Progetti accademici & ricerca</p>
+      <div class="projects-list">
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Tesi Magistrale · CAD</p>
+            <h3 class="project-title">Componente per delaminazione criogenica</h3>
+            <p class="project-desc">
+              Progettazione completa con disegno CAD (Inventor) di un componente dedicato al processo
+              di delaminazione criogenica. Dalla specifica funzionale al modello 3D definitivo.
+            </p>
+          </div>
+          <span class="project-badge">Inventor</span>
+        </div>
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Tesi Triennale · FEM</p>
+            <h3 class="project-title">Analisi FEM di un ponte ferroviario</h3>
+            <p class="project-desc">
+              Modellazione e analisi strutturale agli elementi finiti di un ponte ferroviario
+              tramite ANSYS: carichi statici, dinamici e verifica a fatica.
+            </p>
+          </div>
+          <span class="project-badge">ANSYS</span>
+        </div>
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Reverse Engineering · Additive Manufacturing</p>
+            <h3 class="project-title">Stampa 3D di un cranio umano da TAC</h3>
+            <p class="project-desc">
+              Reverse engineering da imaging medico (TAC), modellazione CAD e stampa
+              in Additive Manufacturing (MEX) di un cranio umano in scala reale.
+            </p>
+          </div>
+          <span class="project-badge">FDM · CAD</span>
+        </div>
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Product Design</p>
+            <h3 class="project-title">Nuovo prodotto in ambito balneare</h3>
+            <p class="project-desc">
+              Sviluppo di concept, progettazione CAD e studio di fattibilità produttiva
+              per un prodotto innovativo destinato al settore balneare.
+            </p>
+          </div>
+          <span class="project-badge">CAD · Design</span>
+        </div>
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Ricerca · Meccatronica</p>
+            <h3 class="project-title">Veicolo autonomo multi-task per logistica</h3>
+            <p class="project-desc">
+              R&D sulla struttura meccanica e meccatronica di un veicolo per la logistica
+              autonomo con ricarica wireless V2G. Progettazione del telaio portante e integrazione sistemi.
+            </p>
+          </div>
+          <span class="project-badge">V2G · Meccatronica</span>
+        </div>
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Ricerca · Sostenibilità</p>
+            <h3 class="project-title">Linea produzione packaging eco-sostenibile</h3>
+            <p class="project-desc">
+              Ricerca e sviluppo sui macchinari per una linea di produzione per la
+              fabbricazione e prototipazione di packaging eco-sostenibile per fluidi.
+            </p>
+          </div>
+          <span class="project-badge">R&D · Green Tech</span>
+        </div>
+
+        <div class="project-row">
+          <div>
+            <p class="project-category">Innovation · EdTech</p>
+            <h3 class="project-title">App educativa in Realtà Aumentata</h3>
+            <p class="project-desc">
+              Progettazione di un'applicazione in campo education basata su tecnologie
+              di Realtà Aumentata per l'apprendimento interattivo di concetti tecnici.
+            </p>
+          </div>
+          <span class="project-badge">AR · EdTech</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMAZIONE -->
+  <section id="education">
+    <div class="container">
+      <p class="section-tag">Formazione</p>
+      <div class="edu-grid">
+        <div class="edu-card">
+          <p class="edu-degree">Laurea Magistrale<br>in Ingegneria Meccanica</p>
+          <p class="edu-uni">Politecnico di Bari</p>
+          <p class="edu-years">2021 – 2024</p>
+          <span class="edu-vote">106 / 110</span>
+        </div>
+        <div class="edu-card">
+          <p class="edu-degree">Laurea Triennale<br>in Ingegneria Meccanica</p>
+          <p class="edu-uni">Politecnico di Bari</p>
+          <p class="edu-years">2016 – 2021</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATTI -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-tag">Contatti</p>
+      <div class="contact-layout">
+        <div>
+          <h2 class="contact-heading">Lavoriamo<br><em>insieme</em></h2>
+          <p class="contact-sub">
+            Sono disponibile per collaborazioni, opportunità di ricerca e
+            progetti industriali. Non esitare a contattarmi.
+          </p>
+        </div>
+        <div class="contact-list">
+          <a href="tel:+393284612746" class="contact-row">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.7 12.5 19.79 19.79 0 0 1 1.64 4C1.63 2.97 2.37 2.08 3.34 2H6.3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 16.92z"/></svg>
+            <div>
+              <div class="contact-label">Telefono</div>
+              <div class="contact-val">+39 328 461 2746</div>
+            </div>
+          </a>
+          <a href="mailto:sriccardi96@gmail.com" class="contact-row">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val">sriccardi96@gmail.com</div>
+            </div>
+          </a>
+          <a href="#" class="contact-row">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+            <div>
+              <div class="contact-label">LinkedIn</div>
+              <div class="contact-val">Aggiungi il tuo profilo</div>
+            </div>
+          </a>
+          <div class="contact-row">
+            <svg class="contact-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div>
+              <div class="contact-label">Posizione</div>
+              <div class="contact-val">Taranto, Puglia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container" style="display:flex;justify-content:space-between;width:100%">
+      <span>© 2026 Saverio Riccardi</span>
+      <span>Ingegnere Meccanico · Politecnico di Bari</span>
+    </div>
+  </footer>
+
+</body>
+</html>
