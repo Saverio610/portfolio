@@ -94,7 +94,7 @@ section{padding:5rem 0}
 
 /* SKILLS */
 #skills{border-top:.5px solid var(--border)}
-.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);border:.5px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:3rem}
+.skills-grid{display:grid;grid-template-columns:repeat(2,1fr);border:.5px solid var(--border);border-radius:4px;overflow:hidden}
 .skill-block{padding:1.8rem 2rem;background:var(--bg);border-right:.5px solid var(--border);border-bottom:.5px solid var(--border)}
 .skill-block:nth-child(2n){border-right:none}
 .skill-block:nth-last-child(-n+2){border-bottom:none}
@@ -102,12 +102,6 @@ section{padding:5rem 0}
 .skill-items{display:flex;flex-wrap:wrap;gap:6px}
 .pill{font-size:13px;padding:4px 12px;background:var(--bg2);border-radius:20px;color:var(--fg);border:.5px solid var(--border)}
 .pill.hi{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.skill-bars{display:flex;flex-direction:column;gap:1.2rem}
-.sbar-header{display:flex;justify-content:space-between;margin-bottom:6px}
-.sbar-name{font-size:13px;font-weight:500}
-.sbar-pct{font-size:12px;color:var(--fg3)}
-.sbar-track{height:3px;background:var(--border);border-radius:2px;overflow:hidden}
-.sbar-fill{height:100%;border-radius:2px;background:var(--fg);width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
 
 /* EXPERIENCE */
 #experience{border-top:.5px solid var(--border)}
@@ -264,13 +258,6 @@ footer span{font-size:12px;color:var(--fg3)}
       <div class="skill-block"><p class="skill-block-title" id="sk3-title">Programmazione & Office</p><div class="skill-items"><span class="pill">MATLAB</span><span class="pill">Word</span><span class="pill">Excel</span><span class="pill">PowerPoint</span></div></div>
       <div class="skill-block"><p class="skill-block-title" id="sk4-title">Norme & Soft Skills</p><div class="skill-items"><span class="pill">ISO</span><span class="pill">UNI</span><span class="pill">Project Management</span><span class="pill">Team Leadership</span></div></div>
     </div>
-    <div class="skill-bars reveal d2" id="sbar-container">
-      <div class="sbar-item"><div class="sbar-header"><span class="sbar-name" id="sb1">Modellazione CAD</span><span class="sbar-pct">95%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="95"></div></div></div>
-      <div class="sbar-item"><div class="sbar-header"><span class="sbar-name" id="sb2">Analisi FEM (ANSYS)</span><span class="sbar-pct">85%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="85"></div></div></div>
-      <div class="sbar-item"><div class="sbar-header"><span class="sbar-name" id="sb3">Additive Manufacturing</span><span class="sbar-pct">80%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="80"></div></div></div>
-      <div class="sbar-item"><div class="sbar-header"><span class="sbar-name" id="sb4">Project Management</span><span class="sbar-pct">75%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="75"></div></div></div>
-      <div class="sbar-item"><div class="sbar-header"><span class="sbar-name">MATLAB</span><span class="sbar-pct">65%</span></div><div class="sbar-track"><div class="sbar-fill" data-w="65"></div></div></div>
-    </div>
   </div>
 </section>
 
@@ -390,7 +377,6 @@ var T = {
     about_p2: 'Attualmente lavoro come Ricercatore Ingegnere Meccanico R&D presso Dyrecta Lab, dove mi occupo di progettazioni meccaniche ad alto livello, project management e partenariati con aziende per ricerca e sviluppo industriale. Il mio approccio unisce rigore tecnico e creatività, con un costante orientamento all\'innovazione.',
     stat1: 'Voto Laurea Magistrale (su 110)', stat2: 'Software CAD padroneggiati', stat3: 'Progetti accademici e di ricerca',
     sk1: 'Modellazione CAD', sk2: 'Analisi FEM', sk3: 'Programmazione & Office', sk4: 'Norme & Soft Skills',
-    sb1: 'Modellazione CAD', sb2: 'Analisi FEM (ANSYS)', sb3: 'Additive Manufacturing', sb4: 'Project Management',
     exp_badge: 'In corso', exp_role: 'Ricercatore Ingegnere Meccanico R&D', exp_co: 'Dyrecta Lab — Istituto di Ricerca',
     eli1: 'Stesura di documenti tecnici e relazioni di ricerca',
     eli2: 'Progettazioni meccaniche ad alto livello, modelli CAD e analisi normativa',
@@ -429,7 +415,6 @@ var T = {
     about_p2: 'I currently work as a Mechanical R&D Researcher at Dyrecta Lab, handling high-level mechanical designs, project management, and industrial R&D partnerships. My approach combines technical rigor with creativity, with a constant focus on innovation.',
     stat1: "Master's Degree Grade (out of 110)", stat2: 'CAD software mastered', stat3: 'Academic & research projects',
     sk1: 'CAD Modelling', sk2: 'FEM Analysis', sk3: 'Programming & Office', sk4: 'Standards & Soft Skills',
-    sb1: 'CAD Modelling', sb2: 'FEM Analysis (ANSYS)', sb3: 'Additive Manufacturing', sb4: 'Project Management',
     exp_badge: 'Current', exp_role: 'Mechanical R&D Engineer – Researcher', exp_co: 'Dyrecta Lab — Research Institute',
     eli1: 'Writing technical documents and research reports',
     eli2: 'High-level mechanical design, CAD modeling, and regulatory analysis',
@@ -463,7 +448,7 @@ function applyLang(lang) {
   var ids = ['lang_btn','n_about','n_projects','n_contact','h_eyebrow','h_btn1','h_btn2',
              'sl_about','sl_skills','sl_exp','sl_proj','sl_edu','sl_cont',
              'stat1','stat2','stat3','sk1_title','sk2_title','sk3_title','sk4_title',
-             'sb1','sb2','sb3','sb4','exp_badge','exp_role','exp_co',
+             'exp_badge','exp_role','exp_co',
              'eli1','eli2','eli3','eli4','eli5','f_all','f_ric','f_inn',
              'pc1','pt1','pd1','pc2','pt2','pd2','pc3','pt3','pd3',
              'pc4','pt4','pd4','pc5','pt5','pd5','pc6','pt6','pd6','pc7','pt7','pd7',
@@ -603,17 +588,6 @@ var co=new IntersectionObserver(function(entries){
 },{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(function(el){ co.observe(el); });
 
-// ─── SKILL BARS ────────────────────────────────────────────────
-var bo=new IntersectionObserver(function(entries){
-  entries.forEach(function(e){
-    if(!e.isIntersecting) return;
-    e.target.querySelectorAll('.sbar-fill').forEach(function(b){ b.style.width=b.getAttribute('data-w')+'%'; });
-    bo.unobserve(e.target);
-  });
-},{threshold:.3});
-var sb=document.getElementById('sbar-container');
-if(sb) bo.observe(sb);
-
 // ─── PROJECT FILTER ────────────────────────────────────────────
 document.querySelectorAll('.fbtn').forEach(function(btn){
   btn.addEventListener('click',function(){
@@ -646,7 +620,7 @@ document.getElementById('fsend').addEventListener('click', function(){
       document.getElementById('fn').value=''; document.getElementById('fe').value=''; document.getElementById('fm').value='';
     })
     .catch(function(){
-      status.textContent='Error — write to sriccardi96@gmail.com'; status.className='err';
+      status.textContent='Error'; status.className='err';
     })
     .finally(function(){ document.getElementById('fsend').disabled=false; });
 });
